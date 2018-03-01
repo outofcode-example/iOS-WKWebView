@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Test</title>
+    <style type="text/css">
+        #container {
+            margin-top: 30pt;
+        }
+        button {
+        	background-color: gray;
+        	border: none;
+        	padding: 10pt;
+        	font-size: 20pt;
+        	width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        function initNative() {
+            bind()
+        }
+        
+        function bind() {
+            var message = {
+                'action': 'bind',
+                'name': 'message'
+            };
+            window.webkit.messageHandlers.test.postMessage(message);
+        }
+    
+        function test() {
+            alert('(Web)test()\nmessage :\n' + message);
+        }
+    
+        function getMessage() {
+            window.webkit.messageHandlers.test.postMessage('getMessage');
+        }
+    
+        function returnMessage(text) {
+            alert('(Native)returnMessage() :\n' + text);
+        }
+    
+        function callFunction() {
+            var message = {
+                'action': 'call',
+                'function': 'returnFunction'
+            };
+            window.webkit.messageHandlers.test.postMessage(message);
+        }
+    
+        function returnFunction(text) {
+            alert('(Web)returnFunction() :\n' + text);
+        }
+    </script>
+</head>
+<body>
+    <div id='container' align='center'>
+        <button onclick='bind();'>Call bind()</button></br>
+        <button onclick='test();' style='margin-top: 10px'>Print Binding Data</button></br>
+        <button onclick='getMessage();' style='margin-top: 10px'>Call getMessage()</button></br>
+        <button onclick='callFunction();' style='margin-top: 10px'>Call callFunction()</button></br>
+    </div>
+</body>
+</html>
